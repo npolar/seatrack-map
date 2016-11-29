@@ -333,10 +333,12 @@ export const Kernel = L.Class.extend({
                 cartocss: options.colonies.cartocss
             }]
         }, { https: true }).addTo(map)
-            .on('done', layer => {
-                this._layer = layer;
-            })
+            .on('done', this.onLayerLoad.bind(this))
             .on('error', err => console.error(err));
+    },
+
+    onLayerLoad(layer) {
+        this._layer = layer;
     },
 
     showMetadata(state) {
