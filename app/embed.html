@@ -17,7 +17,7 @@
 
 <div id="map"></div>
 
-<script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+<script src="//libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
 <script>
 
 window.onload = function() {
@@ -32,7 +32,7 @@ window.onload = function() {
     map.attributionControl.setPrefix('SEATRACK');
 
     // Add basemap
-    L.tileLayer('http://geodata.npolar.no/arcgis/rest/services/Basisdata_Intern/NP_Verden_WMTS_53032/MapServer/tile/{z}/{y}/{x}').addTo(map);
+    L.tileLayer('//geodata.npolar.no/arcgis/rest/services/Basisdata_Intern/NP_Verden_WMTS_53032/MapServer/tile/{z}/{y}/{x}').addTo(map);
 
     cartodb.createLayer(map, {
         user_name: 'seatrack',

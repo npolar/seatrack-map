@@ -34,11 +34,11 @@ export const Map = L.Map.extend({
 
         // const layersControl = L.control.layers(null, null, { position: 'topleft' }).addTo(this);
 
-        L.tileLayer('http://geodata.npolar.no/arcgis/rest/services/Basisdata_Intern/NP_Verden_WMTS_53032/MapServer/tile/{z}/{y}/{x}').addTo(this);
+        L.tileLayer('//geodata.npolar.no/arcgis/rest/services/Basisdata_Intern/NP_Verden_WMTS_53032/MapServer/tile/{z}/{y}/{x}').addTo(this);
 
-        this.createLayer('https://seatrack.carto.com/api/v2/viz/c322bb3e-a128-11e6-8570-0e233c30368f/viz.json', layer => this._colonies = layer).addTo(this);
+        this.createLayer('//seatrack.carto.com/api/v2/viz/c322bb3e-a128-11e6-8570-0e233c30368f/viz.json', layer => this._colonies = layer).addTo(this);
 
-        // this.createLayer('https://seatrack.carto.com/api/v2/viz/95d69428-b5a7-11e6-9c97-0e233c30368f/viz.json', layer => layersControl.addOverlay(layer, 'Graticule'));
+        // this.createLayer('//seatrack.carto.com/api/v2/viz/95d69428-b5a7-11e6-9c97-0e233c30368f/viz.json', layer => layersControl.addOverlay(layer, 'Graticule'));
     },
 
     setColoniesOpacity(opacity) {
