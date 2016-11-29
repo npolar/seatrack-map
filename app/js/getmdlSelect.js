@@ -26,9 +26,10 @@ const getmdlSelect = {
         [].forEach.call(list, function (li) {
             li.onclick = function () {
                 if (!li.getAttribute('disabled')) {
-                    input.value = li.textContent;
+                    // input.value = li.textContent;
+                    input.value = li.textContent.split('(')[0]; // Don't include text in parenthesis
 
-                    dropdown.MaterialTextfield.change(li.textContent); // handles css class changes
+                    dropdown.MaterialTextfield.change(input.value); // handles css class changes
                     setTimeout( function() {
                         dropdown.MaterialTextfield.updateClasses_(); //update css class
                         menu['MaterialMenu'].hide();

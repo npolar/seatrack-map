@@ -46,6 +46,12 @@ export const Kernel = L.Class.extend({
             period(a, b) {
                 return b < a ? -1 : b > a ? 1 : b >= a ? 0 : NaN;
             }
+        },
+        names: {
+            'fall': 'Autumn (August to October)', // TODO: Remove when kernel files are updated
+            'autumn': 'Autumn (August to October)',
+            'winter': 'Winter (November to January)',
+            'spring': 'Spring (February to April)'
         }
     },
 
@@ -253,7 +259,7 @@ export const Kernel = L.Class.extend({
             .append('li')
             .attr('class', 'mdl-menu__item')
             .attr('data-val', d => d.key.toLowerCase())
-            .text(d => d.key.replace(/_/g, ' '))
+            .text(d => this.options.names[d.key] || d.key.replace(/_/g, ' '))
             .on('click', function(d) {
                 if (!this.getAttribute('disabled')) {
                     self.onSelect(id, d.key)
