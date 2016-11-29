@@ -332,7 +332,7 @@ export const Kernel = L.Class.extend({
                 }),
                 cartocss: options.colonies.cartocss
             }]
-        }).addTo(map)
+        }, { https: true }).addTo(map)
             .on('done', layer => {
                 this._layer = layer;
             })
