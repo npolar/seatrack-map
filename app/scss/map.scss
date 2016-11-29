@@ -3,7 +3,15 @@
   width: auto;
   overflow: hidden;
 
+  .leaflet-control-scale {
+    margin-left: 75px;
+  }
+
   .cartodb-logo {
-    display: none!important;
+    //display: none!important;
+    img {
+      left: 2px!important;
+      bottom: 0!important;
+    }
   }
 }
