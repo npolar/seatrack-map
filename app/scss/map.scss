@@ -1,0 +1,9 @@
+.seatrack-map {
+  height: 100%;
+  width: auto;
+  overflow: hidden;
+
+  .cartodb-logo {
+    display: none!important;
+  }
+}

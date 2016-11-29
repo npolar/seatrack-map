@@ -1,0 +1,49 @@
+@import "../lib/jquery-ui.min.css";
+
+#seatrack-accordion {
+
+  .ui-accordion-header {
+    border: 0;
+    background: #eee;
+    color: #333;
+    margin: 0;
+    padding: 0 0 0 40px;
+    height: 40px;
+    border-bottom: 1px solid #bbb;
+
+    .accordion-color {
+      position: absolute;
+      display: block;
+      width: 20px;
+      height: 20px;
+      left: 10px;
+      top: 11px;
+    }
+
+    .accordion-name {
+      font-style: italic;
+      line-height: 43px;
+    }
+
+    .accordion-delete-btn {
+      display: none;
+      position: absolute;
+      right: 3px;
+      top: 5px;
+      color: #333;
+    }
+
+    .ui-accordion-header-icon {
+      display: none;
+    }
+  }
+
+  .ui-accordion-header:active, .ui-accordion-header:focus {
+    outline: none;
+  }
+
+  .ui-accordion-content {
+    padding: 10px 20px;
+  }
+
+}

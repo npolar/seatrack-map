@@ -1,0 +1,31 @@
+.seatrack-controls {
+  width: 260px;
+  float: right;
+  height: 100%;
+  border-left: 1px solid #aaa;
+
+  .mdl-textfield:not(:first-child) {
+    margin-top: -10px;
+  }
+
+  .mdl-menu__item {
+    height: 26px;
+    line-height: 26px;
+  }
+
+  #seatrack-add-button {
+    display: none;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+  }
+
+}
+
+.seatrack-controls-max {
+
+  .seatrack-add-button {
+    display: none;
+  }
+
+}
