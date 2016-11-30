@@ -172,7 +172,7 @@ export const Kernel = L.Class.extend({
         const itemEl = selectEl.select('[data-val="' + value + '"]');
 
         if (!itemEl.empty()) { // Item found
-            const name = itemEl.text();
+            const name = itemEl.text().split('(')[0]; // Don't include text in parenthesis
 
             this._state[id] = value.toLowerCase();
 
