@@ -4,6 +4,12 @@ import scale from './Scale';
 
 L.Icon.Default.imagePath = '//unpkg.com/leaflet@1.0.2/dist/images'; // TODO
 
+// https://trac.osgeo.org/proj/ticket/211
+// https://trac.osgeo.org/proj/ticket/246
+// http://gis.stackexchange.com/questions/53970/proj4-inconsistent-longitude-after-projection
+// http://gis.stackexchange.com/questions/68938/manipulating-azimuthal-equidistant-projections-in-qgis
+
+// https://epsg.io/53032
 const crs = new L.Proj.CRS('ESRI:53032', '+proj=aeqd +lat_0=0 +lon_0=0 +x_0=0 +y_0=0 +a=6371000 +b=6371000 +units=m no_defs', {
     origin: [-20037508.34, 20037508.34],
     resolutions: [
@@ -21,12 +27,14 @@ const crs = new L.Proj.CRS('ESRI:53032', '+proj=aeqd +lat_0=0 +lon_0=0 +x_0=0 +y
     ]
 });
 
+proj4.defs('EPSG:4035', '+proj=longlat +a=6371000 +b=6371000 +no_defs');
+crs.projection._proj = proj4('EPSG:4035', 'ESRI:53032');
+
 export const Map = L.Map.extend({
 
     options: {
         crs: crs,
         id: 'seatrack-map',
-        // center: [56, 4],
         center: [67, 4],
         zoom: 4,
         minZoom: 2,
@@ -57,8 +65,7 @@ export const Map = L.Map.extend({
         this.addCountryOutline();
         this.addGraticule();
 
-        this.addMarker(); // Only for testing
-        // L.geoJson(countries).addTo(this);
+        //this.addMarker(); // Only for testing
     },
 
     setColoniesOpacity(opacity) {
@@ -96,7 +103,7 @@ export const Map = L.Map.extend({
 
     // Add test marker
     addMarker() {
-        // L.marker([64.147194, -21.940167]).addTo(this);
+        L.marker([64.147194, -21.940167]).addTo(this);
         L.marker([59.911111, 10.733333]).addTo(this);
     }
 
