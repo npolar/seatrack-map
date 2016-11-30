@@ -32,6 +32,8 @@ export const Selection = L.Class.extend({
                 colony: this.getURLParameter('colony')
             }
         }));
+
+        map.addMarker(this.getURLParameter('latitude'), this.getURLParameter('longitude'));
     },
 
     createAccordion() {

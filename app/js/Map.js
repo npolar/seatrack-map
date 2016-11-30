@@ -1,32 +1,16 @@
 import scale from './Scale';
-// import proj4 from 'proj4';
-// import 'proj4leaflet';
-
-L.Icon.Default.imagePath = '//unpkg.com/leaflet@1.0.2/dist/images'; // TODO
-
-// https://trac.osgeo.org/proj/ticket/211
-// https://trac.osgeo.org/proj/ticket/246
-// http://gis.stackexchange.com/questions/53970/proj4-inconsistent-longitude-after-projection
-// http://gis.stackexchange.com/questions/68938/manipulating-azimuthal-equidistant-projections-in-qgis
+import 'script!proj4';
+import 'script!proj4leaflet';
 
 // https://epsg.io/53032
+// Same origin and resolutions as Web Mercator
 const crs = new L.Proj.CRS('ESRI:53032', '+proj=aeqd +lat_0=0 +lon_0=0 +x_0=0 +y_0=0 +a=6371000 +b=6371000 +units=m no_defs', {
     origin: [-20037508.34, 20037508.34],
-    resolutions: [
-        156543.03390625,
-         78271.5169531,
-         39135.7584766,
-         19567.8792383,
-          9783.93961914,
-          4891.96980957,
-          2445.98490479,
-          1222.99245239,
-           611.496226196,
-           305.748113098,
-           152.874056549
-    ]
+    resolutions: [156543.03, 78271.52, 39135.76, 19567.88, 9783.94, 4891.97, 2445.98, 1222.99, 611.50, 305.75, 152.87, 76.44, 38.22]
 });
 
+// Need to specify from projection as a sphere to get the calculations right
+// https://osgeo-org.atlassian.net/browse/GEOS-7778#comment-60141
 proj4.defs('EPSG:4035', '+proj=longlat +a=6371000 +b=6371000 +no_defs');
 crs.projection._proj = proj4('EPSG:4035', 'ESRI:53032');
 
@@ -64,8 +48,6 @@ export const Map = L.Map.extend({
 
         this.addCountryOutline();
         this.addGraticule();
-
-        //this.addMarker(); // Only for testing
     },
 
     setColoniesOpacity(opacity) {
@@ -101,10 +83,11 @@ export const Map = L.Map.extend({
         });
     },
 
-    // Add test marker
-    addMarker() {
-        L.marker([64.147194, -21.940167]).addTo(this);
-        L.marker([59.911111, 10.733333]).addTo(this);
+    // Add marker
+    addMarker(latitude, longitude) {
+        if (latitude && longitude) {
+            L.marker([latitude, longitude]).addTo(this);
+        }
     }
 
 });
