@@ -23,7 +23,7 @@ export const Map = L.Map.extend({
 
         scale().addTo(this);
 
-        this._layersControl = L.control.layers(null, null, { position: 'topleft' }).addTo(this);
+        this._layersControl = L.control.layers(null, null, { position: 'topright' }).addTo(this);
 
         // Basemap
         L.tileLayer('//geodata.npolar.no/arcgis/rest/services/Basisdata_Intern/NP_Verden_WMTS_53032/MapServer/tile/{z}/{y}/{x}').addTo(this);
