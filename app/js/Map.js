@@ -1,10 +1,33 @@
 import scale from './Scale';
+// import proj4 from 'proj4';
+// import 'proj4leaflet';
+
+L.Icon.Default.imagePath = '//unpkg.com/leaflet@1.0.2/dist/images'; // TODO
+
+const crs = new L.Proj.CRS('ESRI:53032', '+proj=aeqd +lat_0=0 +lon_0=0 +x_0=0 +y_0=0 +a=6371000 +b=6371000 +units=m no_defs', {
+    origin: [-20037508.34, 20037508.34],
+    resolutions: [
+        156543.03390625,
+         78271.5169531,
+         39135.7584766,
+         19567.8792383,
+          9783.93961914,
+          4891.96980957,
+          2445.98490479,
+          1222.99245239,
+           611.496226196,
+           305.748113098,
+           152.874056549
+    ]
+});
 
 export const Map = L.Map.extend({
 
     options: {
+        crs: crs,
         id: 'seatrack-map',
-        center: [56, 4],
+        // center: [56, 4],
+        center: [67, 4],
         zoom: 4,
         minZoom: 2,
         maxZoom: 10,
@@ -18,7 +41,7 @@ export const Map = L.Map.extend({
         this.attributionControl.setPrefix('SEATRACK');
 
         L.control.zoom({
-            position:'topright'
+            position: 'topright'
         }).addTo(this);
 
         scale().addTo(this);
@@ -34,6 +57,8 @@ export const Map = L.Map.extend({
         this.addCountryOutline();
         this.addGraticule();
 
+        this.addMarker(); // Only for testing
+        // L.geoJson(countries).addTo(this);
     },
 
     setColoniesOpacity(opacity) {
@@ -67,8 +92,13 @@ export const Map = L.Map.extend({
             layer.setZIndex(910);
             this._layersControl.addOverlay(layer, 'Graticule');
         });
-    }
+    },
 
+    // Add test marker
+    addMarker() {
+        // L.marker([64.147194, -21.940167]).addTo(this);
+        L.marker([59.911111, 10.733333]).addTo(this);
+    }
 
 });
 
