@@ -3,12 +3,30 @@
   width: auto;
   overflow: hidden;
 
+  .leaflet-control {
+    border-radius: 0;
+  }
+
+  .leaflet-control-layers-toggle {
+    background: #fff;
+    width: 26px;
+    height: 26px;
+
+    span {
+      width: 100%;
+      height: 100%;
+      line-height: 26px;
+      text-align: center;
+      color: #333;
+      font-size: 22px;
+    }
+  }
+
   .leaflet-control-scale {
     margin-left: 75px;
   }
 
   .cartodb-logo {
-    //display: none!important;
     img {
       left: 2px!important;
       bottom: 0!important;

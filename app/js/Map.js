@@ -1,4 +1,7 @@
-import scale from './Scale';
+import layerControl from './LayerControl';
+import markerControl from './MarkerControl';
+import scaleControl from './ScaleControl';
+
 import 'script!proj4';
 import 'script!proj4leaflet';
 
@@ -36,9 +39,11 @@ export const Map = L.Map.extend({
             position: 'topright'
         }).addTo(this);
 
-        scale().addTo(this);
+        markerControl().addTo(this);
+        this._layersControl = layerControl().addTo(this);
+        scaleControl().addTo(this);
 
-        this._layersControl = L.control.layers(null, null, { position: 'topright' }).addTo(this);
+        // this._layersControl = L.control.layers(null, null, { position: 'topright' }).addTo(this);
 
         // Basemap
         L.tileLayer('//geodata.npolar.no/arcgis/rest/services/Basisdata_Intern/NP_Verden_WMTS_53032/MapServer/tile/{z}/{y}/{x}').addTo(this);
