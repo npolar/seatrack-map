@@ -4,7 +4,7 @@ import 'dialog-polyfill/dialog-polyfill.css';
 export const MarkerControl = L.Control.extend({
 
     options: {
-        position: 'topright'
+        position: 'topleft'
     },
 
     onAdd(map) {
@@ -12,10 +12,6 @@ export const MarkerControl = L.Control.extend({
         this._initLayout();
 
         return this._container;
-    },
-
-    onRemove(map) {
-
     },
 
     _initLayout() {

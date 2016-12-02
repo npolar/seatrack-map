@@ -1,0 +1,100 @@
+.seatrack-header {
+
+  .mdl-layout__header-row {
+    height: 70px;
+
+    .seatrack-logo {
+      position: relative;
+      margin-left: -5px;
+
+      .mdl-layout-title {
+        color: #FFF;
+        font-weight: bold;
+        position: absolute;
+        left: 80px;
+        top: 20px;
+      }
+
+      .mdl-layout-subtitle {
+        position: absolute;
+        font-size: 9px;
+        letter-spacing: 3px;
+        left: 80px;
+        top: 36px;
+        white-space: nowrap;
+      }
+    }
+
+    .seatrack-partners {
+      position: absolute;
+      right: 0;
+      top: 9px;
+
+      img {
+        height: 40px;
+        padding-right: 20px;
+      }
+
+      .npi-logo {
+        height: 50px;
+        margin-top: -3px;
+      }
+
+      .mdir-logo {
+        height: 30px;
+        margin-top: 6px;
+      }
+
+    }
+
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .seatrack-header {
+    .mdl-layout__header-row {
+      height: 56px;
+
+      .seatrack-logo {
+        img {
+          height: 40px;
+        }
+        .mdl-layout-title {
+          font-size: 18px;
+          left: 60px;
+          top: 13px;
+        }
+
+        .mdl-layout-subtitle {
+          display: none;
+        }
+
+      }
+
+      .seatrack-partners {
+        top: 11px;
+
+        img {
+          height: 32px;
+          padding-right: 15px;
+        }
+
+        .npi-logo {
+          height: 40px;
+        }
+
+        .mdir-logo {
+          height: 23px;
+        }
+
+      }
+
+    }
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .seatrack-partners {
+    display: none;
+  }
+}

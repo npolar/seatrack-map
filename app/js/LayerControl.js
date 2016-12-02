@@ -1,7 +1,7 @@
 export const LayerControl = L.Control.Layers.extend({
 
     options: {
-        position: 'topright'
+        position: 'topleft'
     },
 
     _initLayout() {

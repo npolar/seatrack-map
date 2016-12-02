@@ -1,6 +1,7 @@
 import layerControl from './LayerControl';
 import markerControl from './MarkerControl';
 import scaleControl from './ScaleControl';
+import {select} from 'd3-selection';
 
 import 'script!proj4';
 import 'script!proj4leaflet';
@@ -26,7 +27,7 @@ export const Map = L.Map.extend({
         zoom: 4,
         minZoom: 2,
         maxZoom: 10,
-        zoomControl: false
+        //zoomControl: false
     },
 
     initialize(options) {
@@ -35,9 +36,13 @@ export const Map = L.Map.extend({
 
         this.attributionControl.setPrefix('SEATRACK');
 
+        this.addTooptip();
+
+        /*
         L.control.zoom({
             position: 'topright'
         }).addTo(this);
+        */
 
         markerControl().addTo(this);
         this._layersControl = layerControl().addTo(this);
@@ -93,6 +98,19 @@ export const Map = L.Map.extend({
         if (latitude && longitude) {
             L.marker([latitude, longitude]).addTo(this);
         }
+    },
+
+    addTooptip() {
+        if (select('.seatrack-layout').classed('is-small-screen')) {
+            select('.seatrack-layout').classed('seatrack-show-tooltip', true);
+            select('.seatrack-header').on('click', this.hideTooltip.bind(this));
+            this.on('mousedown', this.hideTooltip, this);
+        }
+    },
+
+    hideTooltip() {
+        select('.seatrack-layout').classed('seatrack-show-tooltip', false);
+        this.off('mousedown', this.hide, this);
     }
 
 });
