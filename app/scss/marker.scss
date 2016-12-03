@@ -22,3 +22,17 @@
   }
 
 }
+
+.leaflet-touch {
+  .leaflet-control-marker {
+    width: 30px;
+    height: 30px;
+    box-shadow: none;
+    border: 2px solid rgba(0,0,0,0.2);
+    background-clip: padding-box;
+
+    span {
+      line-height: 30px;
+    }
+  }
+}
