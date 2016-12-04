@@ -28,7 +28,7 @@
     .seatrack-partners {
       position: absolute;
       right: 0;
-      top: 9px;
+      top: 14px;
 
       img {
         height: 40px;
@@ -50,7 +50,7 @@
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 820px) {
   .seatrack-header {
     .mdl-layout__header-row {
       height: 56px;
