@@ -40,16 +40,56 @@
     <dialog class="mdl-dialog">
         <h4 class="mdl-dialog__title">Add map marker</h4>
         <div class="mdl-dialog__content">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="longitude" value="15.6469">
-                <label class="mdl-textfield__label" for="longitude">Longitude</label>
-                <span class="mdl-textfield__error">Input is not a number!</span>
+            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="seatrack-switch">
+                <input type="checkbox" id="seatrack-switch" class="mdl-switch__input">
+                <span class="mdl-switch__label">Decimals degrees</span>
+            </label>
+
+            <div class="seatrack-decimals">
+                <div class="seatrack-lat mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="latitude" value="78.2233">
+                    <label class="mdl-textfield__label" for="latitude">Latitude</label>
+                    <span class="mdl-textfield__error">Input is not a number!</span>
+                </div>
+                <div class="seatrack-lng mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="longitude" value="15.6469">
+                    <label class="mdl-textfield__label" for="longitude">Longitude</label>
+                    <span class="mdl-textfield__error">Input is not a number!</span>
+                </div>
             </div>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="latitude" value="78.2233">
-                <label class="mdl-textfield__label" for="latitude">Latitude</label>
-                <span class="mdl-textfield__error">Input is not a number!</span>
+
+            <div class="seatrack-degrees">
+                <h5>Latitude</h5>
+                <div class="seatrack-lat-deg mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="lat-deg">
+                    <label class="mdl-textfield__label" for="lng-deg">Degrees</label>
+                </div>
+                <div class="seatrack-lat-min mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="lat-min">
+                    <label class="mdl-textfield__label" for="lng-min">Minutes</label>
+                </div>
+                <div class="seatrack-lat-sec mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="lat-sec">
+                    <label class="mdl-textfield__label" for="lng-sec">Seconds</label>
+                </div>
             </div>
+
+            <div class="seatrack-degrees">
+                <h5>Longitude</h5>
+                <div class="seatrack-lng-deg mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="lng-deg">
+                    <label class="mdl-textfield__label" for="lng-deg">Degrees</label>
+                </div>
+                <div class="seatrack-lng-min mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="lng-min">
+                    <label class="mdl-textfield__label" for="lng-min">Minutes</label>
+                </div>
+                <div class="seatrack-lng-sec mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="lng-sec">
+                    <label class="mdl-textfield__label" for="lng-sec">Seconds</label>
+                </div>
+            </div>
+
         </div>
         <div class="mdl-dialog__actions">
             <button type="button" class="mdl-button ok">OK</button>

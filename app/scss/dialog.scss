@@ -4,4 +4,51 @@
   .mdl-dialog__title {
     font-size: 22px;
   }
+
+  .mdl-dialog__content {
+    padding-top: 10px;
+
+    .mdl-switch {
+      margin-bottom: 20px;
+      color: #333;
+
+      &.is-focused .mdl-switch__focus-helper {
+        box-shadow: none
+      }
+
+      .mdl-switch__label {
+        font-size: 13px;
+      }
+    }
+
+    .seatrack-decimals {
+      display: none;
+    }
+
+    .seatrack-degrees {
+
+      h5 {
+        font-size: 16px;
+        margin: 0 0 2px;
+        color: #333;
+      }
+
+      label {
+        font-size: 13px;
+      }
+
+      & > div {
+        display: inline-block;
+        float: left;
+        width: 70px;
+        margin-right: 10px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
+    }
+  }
+
 }
