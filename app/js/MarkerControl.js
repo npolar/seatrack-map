@@ -34,7 +34,7 @@ export const MarkerControl = L.Control.extend({
             dialogPolyfill.registerDialog(dialog);
         }
 
-        dialog.querySelector('#seatrack-switch').addEventListener('change', this.toggleFormat.bind(this));
+        dialog.querySelector('.mdl-tabs__tab-bar').addEventListener('click', this.toggleFormat.bind(this));
 
         dialog.querySelector('.close').addEventListener('click', () => dialog.close());
         dialog.querySelector('.ok').addEventListener('click', this.addMarker.bind(this));
@@ -44,7 +44,7 @@ export const MarkerControl = L.Control.extend({
     toggleFormat(evt) {
         const dialog = select(this._dialog);
 
-        if (this._format !== 'decimals') { // Switch to decimals
+        if (evt.target.href.indexOf('decimals') !== -1) { // Switch to decimals
             const latlng = this.getDegrees();
             const lat = latlng[0];
             const lng = latlng[1];
@@ -120,11 +120,17 @@ export const MarkerControl = L.Control.extend({
         dialog.close();
 
         // Only allow one marker
-        if (this._marker) {
+        if (this._marker && this._map.hasLayer(this._marker)) {
             this._map.removeLayer(this._marker);
         }
 
         this._marker = L.marker(latlng).addTo(this._map);
+
+        this._marker.bindPopup('<button class="seatrack-marker-remove mdl-button mdl-js-button">Remove marker</button>');
+
+        this._marker.on('popupopen', () => {
+            select(this._marker._popup._contentNode).select('.seatrack-marker-remove').on('click', () => this._map.removeLayer(this._marker));
+        });
 
         // window.history.pushState({}, null, `?longitude=${longitude}&latitude=${latitude}`);
     },
