@@ -9,12 +9,14 @@
     <link rel="stylesheet" href="//libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
 </head>
 <body>
-    <div class="seatrack-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <div class="seatrack-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
         <header class="seatrack-header mdl-layout__header mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
             <div class="mdl-layout__header-row">
-                <img src="img/seatrack.svg" height="60px" class="seatrack-logo">
-                <span class="mdl-layout-title">SEATRACK</span>
-                <span class="mdl-layout-subtitle">Seabird Tracking</span>
+                <div class="seatrack-logo">
+                    <img src="img/seatrack.svg" height="54px">
+                    <span class="mdl-layout-title">SEATRACK</span>
+                    <span class="mdl-layout-subtitle">Seabird Tracking</span>
+                </div>
                 <div class="seatrack-partners">
                     <a href="http://www.npolar.no/" target="_blank"><img src="img/npi.svg" height="50px" class="npi-logo" title="Norwegian Polar Inistitute"></a>
                     <a href="http://nina.no/" target="_blank"><img src="img/nina.svg" height="40px" class="nina-logo" title="Norwegian Insitute for Nature Research"></a>
@@ -22,16 +24,74 @@
                 </div>
             </div>
         </header>
-        <main class="mdl-layout__content">
+        <div class="mdl-layout__drawer">
             <div class="seatrack-controls">
                 <div id="seatrack-accordion"></div>
                 <button id="seatrack-add-button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
                     <i class="material-icons">add</i>
                 </button>
             </div>
-            <div id="seatrack-map" class="seatrack-map"></div>
+        </div>
+        <main id="seatrack-map" class="seatrack-map mdl-layout__content">
+            <div id="tooltip" class="seatrack-tooltip">Select your map</div>
         </main>
     </div>
+
+    <dialog class="mdl-dialog">
+        <h4 class="mdl-dialog__title">Add map marker</h4>
+        <div class="mdl-dialog__content">
+
+            <div class="mdl-tabs mdl-js-tabs">
+                <div class="mdl-tabs__tab-bar">
+                    <a href="#degrees-panel" class="mdl-tabs__tab is-active">Degrees</a>
+                    <a href="#decimals-panel" class="mdl-tabs__tab">Decimals</a>
+                </div>
+                <div class="mdl-tabs__panel is-active" id="degrees-panel">
+                    <h5>Latitude</h5>
+                    <div class="seatrack-lat-deg mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*?" id="lat-deg">
+                        <label class="mdl-textfield__label" for="lng-deg">Degrees</label>
+                    </div>
+                    <div class="seatrack-lat-min mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*?" id="lat-min">
+                        <label class="mdl-textfield__label" for="lng-min">Minutes</label>
+                    </div>
+                    <div class="seatrack-lat-sec mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="lat-sec">
+                        <label class="mdl-textfield__label" for="lng-sec">Seconds</label>
+                    </div>
+                    <h5>Longitude</h5>
+                    <div class="seatrack-lng-deg mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*?" id="lng-deg">
+                        <label class="mdl-textfield__label" for="lng-deg">Degrees</label>
+                    </div>
+                    <div class="seatrack-lng-min mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*?" id="lng-min">
+                        <label class="mdl-textfield__label" for="lng-min">Minutes</label>
+                    </div>
+                    <div class="seatrack-lng-sec mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="lng-sec">
+                        <label class="mdl-textfield__label" for="lng-sec">Seconds</label>
+                    </div>
+                </div>
+                <div class="mdl-tabs__panel" id="decimals-panel">
+                    <div class="seatrack-lat mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="latitude">
+                        <label class="mdl-textfield__label" for="latitude">Latitude</label>
+                    </div>
+                    <div class="seatrack-lng mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="longitude">
+                        <label class="mdl-textfield__label" for="longitude">Longitude</label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button ok">OK</button>
+            <button type="button" class="mdl-button close">Cancel</button>
+        </div>
+    </dialog>
 
     <script src="//libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
     <script src="app.js"></script> <!-- transpiled -->

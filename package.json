@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --content-base build/",
-    "build": "webpack && cp app/index.html build/index.html",
+    "build": "webpack && cp app/index.html build/index.html && cp -r app/img build/img",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -37,6 +37,7 @@
   "dependencies": {
     "d3-collection": "^1.0.1",
     "d3-selection": "^1.0.2",
+    "dialog-polyfill": "^0.4.5",
     "getmdl-select": "^1.0.4",
     "material-design-lite": "^1.2.1",
     "proj4": "^2.3.15",
