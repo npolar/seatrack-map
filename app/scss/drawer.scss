@@ -6,6 +6,10 @@
   .mdl-layout--fixed-drawer > .mdl-layout__header .mdl-layout__header-row {
     padding-left: 40px;
   }
+
+  .mdl-layout__header {
+    margin-left: 240px;
+  }
 }
 
 @media screen and (max-width: 820px) {
