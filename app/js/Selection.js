@@ -1,7 +1,7 @@
 import kernel from './Kernel';
 import {select} from 'd3-selection';
 
-require('script!../lib/jquery-ui.min');
+require('script-loader!../lib/jquery-ui.min');
 
 MaterialLayout.prototype.Constant_.MAX_WIDTH = '(max-width: 820px)';
 

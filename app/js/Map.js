@@ -3,8 +3,8 @@ import markerControl from './MarkerControl';
 import scaleControl from './ScaleControl';
 import {select} from 'd3-selection';
 
-import 'script!proj4';
-import 'script!proj4leaflet';
+import 'script-loader!proj4/dist/proj4.js';
+import 'script-loader!proj4leaflet';
 
 // https://epsg.io/53032
 // Same origin and resolutions as Web Mercator

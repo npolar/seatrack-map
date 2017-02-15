@@ -19,7 +19,7 @@ const common = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel',
+                loader: 'babel-loader',
                 query: {
                     cacheDirectory: true,
                     presets: ['es2015']
@@ -27,18 +27,18 @@ const common = {
             },
             {
                 test: /\.css$/,
-                loaders: ['style', 'css']
+                loaders: ['style-loader', 'css-loader']
             },
             {
                 test: /\.scss$/,
-                loaders: ['style', 'css', 'sass']
+                loaders: ['style-loader', 'css-loader', 'sass-loader']
             },
             {
                 test: /\.(png|gif|jpg|jpeg)$/,
                 loader: 'file-loader'
             }, {
                 test: require.resolve('./node_modules/material-design-lite/material'),
-                loader: 'exports?componentHandler'
+                loader: 'exports-loader?componentHandler'
             }
         ]
     }
@@ -51,8 +51,7 @@ switch(process.env.npm_lifecycle_event) {
     case 'build':
         config = merge(common, {
             plugins: [
-                new webpack.optimize.DedupePlugin(),
-                new webpack.optimize.OccurenceOrderPlugin(),
+                new webpack.optimize.OccurrenceOrderPlugin(),
                 new webpack.optimize.UglifyJsPlugin({
                     debug: true,
                     minimize: true,
