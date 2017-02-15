@@ -9,6 +9,10 @@
 
   .leaflet-control {
     border-radius: 0;
+
+    a {
+      border-radius: 0;
+    }
   }
 
   .leaflet-control-layers-toggle {

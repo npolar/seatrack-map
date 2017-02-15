@@ -1,6 +1,24 @@
 import {select} from 'd3-selection';
 import dialogPolyfill from 'dialog-polyfill';
 import 'dialog-polyfill/dialog-polyfill.css';
+import proj4 from 'proj4';
+
+proj4.defs([
+    ['ESRI:53032', '+proj=aeqd +lat_0=0 +lon_0=0 +x_0=0 +y_0=0 +a=6371000 +b=6371000 +units=m no_defs'],
+    ['EPSG:4035', '+proj=longlat +a=6371000 +b=6371000 +no_defs']  // Spherical https://osgeo-org.atlassian.net/browse/GEOS-7778#comment-60141
+]);
+
+// https://epsg.io/53032
+// Same origin and resolutions as Web Mercator
+//const crs = new L.Proj.CRS('ESRI:53032', '+proj=aeqd +lat_0=0 +lon_0=0 +x_0=0 +y_0=0 +a=6371000 +b=6371000 +units=m no_defs', {
+//    origin: [-20037508.34, 20037508.34],
+//    resolutions: [156543.03, 78271.52, 39135.76, 19567.88, 9783.94, 4891.97, 2445.98, 1222.99, 611.50, 305.75, 152.87, 76.44, 38.22]
+//});
+
+// Need to specify from projection as a sphere to get the calculations right
+// https://osgeo-org.atlassian.net/browse/GEOS-7778#comment-60141
+//proj4.defs('EPSG:4035', '+proj=longlat +a=6371000 +b=6371000 +no_defs');
+//crs.projection._proj = proj4('EPSG:4035', 'ESRI:53032');
 
 export const MarkerControl = L.Control.extend({
 
@@ -123,6 +141,9 @@ export const MarkerControl = L.Control.extend({
         if (this._marker && this._map.hasLayer(this._marker)) {
             this._map.removeLayer(this._marker);
         }
+
+        // Reproject
+        latlng = proj4(proj4('EPSG:3857'), proj4('EPSG:4035'), proj4(proj4('EPSG:4035'), proj4('ESRI:53032'), latlng.reverse())).reverse();
 
         this._marker = L.marker(latlng).addTo(this._map);
 

@@ -3,31 +3,14 @@ import markerControl from './MarkerControl';
 import scaleControl from './ScaleControl';
 import {select} from 'd3-selection';
 
-import 'script-loader!proj4/dist/proj4.js';
-import 'script-loader!proj4leaflet';
-
-// https://epsg.io/53032
-// Same origin and resolutions as Web Mercator
-const crs = new L.Proj.CRS('ESRI:53032', '+proj=aeqd +lat_0=0 +lon_0=0 +x_0=0 +y_0=0 +a=6371000 +b=6371000 +units=m no_defs', {
-    origin: [-20037508.34, 20037508.34],
-    resolutions: [156543.03, 78271.52, 39135.76, 19567.88, 9783.94, 4891.97, 2445.98, 1222.99, 611.50, 305.75, 152.87, 76.44, 38.22]
-});
-
-// Need to specify from projection as a sphere to get the calculations right
-// https://osgeo-org.atlassian.net/browse/GEOS-7778#comment-60141
-proj4.defs('EPSG:4035', '+proj=longlat +a=6371000 +b=6371000 +no_defs');
-crs.projection._proj = proj4('EPSG:4035', 'ESRI:53032');
-
 export const Map = L.Map.extend({
 
     options: {
-        crs: crs,
         id: 'seatrack-map',
-        center: [67, 4],
+        center: [55, 0],
         zoom: 4,
         minZoom: 2,
-        maxZoom: 10,
-        //zoomControl: false
+        maxZoom: 10
     },
 
     initialize(options) {
@@ -38,17 +21,9 @@ export const Map = L.Map.extend({
 
         this.addTooptip();
 
-        /*
-        L.control.zoom({
-            position: 'topright'
-        }).addTo(this);
-        */
-
         markerControl().addTo(this);
         this._layersControl = layerControl().addTo(this);
         scaleControl().addTo(this);
-
-        // this._layersControl = L.control.layers(null, null, { position: 'topright' }).addTo(this);
 
         // Basemap
         L.tileLayer('//geodata.npolar.no/arcgis/rest/services/Basisdata_Intern/NP_Verden_WMTS_53032/MapServer/tile/{z}/{y}/{x}').addTo(this);
@@ -118,3 +93,6 @@ export const Map = L.Map.extend({
 export default function map(options) {
     return new Map(options);
 }
+
+
+
