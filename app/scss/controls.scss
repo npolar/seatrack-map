@@ -1,8 +1,6 @@
 .seatrack-controls {
-  width: 260px;
-  float: right;
+  width: 100%;
   height: 100%;
-  border-left: 1px solid #aaa;
 
   .mdl-textfield:not(:first-child) {
     margin-top: -10px;
@@ -20,6 +18,10 @@
     bottom: 10px;
   }
 
+  .mdl-button--fab.mdl-button--colored {
+    background: red;
+  }
+
 }
 
 .seatrack-controls-max {
@@ -29,3 +31,4 @@
   }
 
 }
+

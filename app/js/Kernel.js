@@ -1,4 +1,3 @@
-import {select} from 'd3-selection';
 import {nest} from 'd3-collection';
 import getmdlSelect from './getmdlSelect';
 const componentHandler = require('../../node_modules/material-design-lite/material');

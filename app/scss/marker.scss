@@ -1,0 +1,44 @@
+.seatrack-map {
+
+  .leaflet-control-marker {
+    width: 26px;
+    height: 26px;
+    background-color: #fff;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f4f4f4;
+    }
+
+    span {
+      width: 100%;
+      height: 100%;
+      line-height: 26px;
+      text-align: center;
+      color: #333;
+      font-size: 22px;
+    }
+  }
+
+  .seatrack-marker-remove {
+    font-size: 12px;
+    height: 24px;
+    line-height: 24px;
+  }
+
+}
+
+.leaflet-touch {
+  .leaflet-control-marker {
+    width: 30px;
+    height: 30px;
+    box-shadow: none;
+    border: 2px solid rgba(0,0,0,0.2);
+    background-clip: padding-box;
+
+    span {
+      line-height: 30px;
+    }
+  }
+}

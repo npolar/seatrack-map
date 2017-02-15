@@ -3,6 +3,8 @@ import {select} from 'd3-selection';
 
 require('script!../lib/jquery-ui.min');
 
+MaterialLayout.prototype.Constant_.MAX_WIDTH = '(max-width: 820px)';
+
 export const Selection = L.Class.extend({
 
     options: {

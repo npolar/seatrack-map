@@ -1,4 +1,4 @@
-export const Scale = L.Control.Scale.extend({
+export const ScaleControl = L.Control.Scale.extend({
     options: {
         imperial: false,
         updateWhenIdle: true
@@ -12,6 +12,6 @@ export const Scale = L.Control.Scale.extend({
     }
 });
 
-export default function scale(options) {
-    return new Scale(options);
+export default function scaleControl(options) {
+    return new ScaleControl(options);
 }
