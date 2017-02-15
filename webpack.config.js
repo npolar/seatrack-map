@@ -73,7 +73,11 @@ switch(process.env.npm_lifecycle_event) {
                 // Customize host/port here if needed
                 host: process.env.HOST,
                 //port: process.env.PORT
-                port: 8081
+                port: 8081,
+                inline: true,
+                colors: true,
+                progress: true,
+                devtool: 'source-map'
             })
         );
 }
