@@ -26,8 +26,7 @@ export const Map = L.Map.extend({
         center: [67, 4],
         zoom: 4,
         minZoom: 2,
-        maxZoom: 10,
-        //zoomControl: false
+        maxZoom: 10
     },
 
     initialize(options) {
@@ -38,17 +37,9 @@ export const Map = L.Map.extend({
 
         this.addTooptip();
 
-        /*
-        L.control.zoom({
-            position: 'topright'
-        }).addTo(this);
-        */
-
         markerControl().addTo(this);
         this._layersControl = layerControl().addTo(this);
         scaleControl().addTo(this);
-
-        // this._layersControl = L.control.layers(null, null, { position: 'topright' }).addTo(this);
 
         // Basemap
         L.tileLayer('//geodata.npolar.no/arcgis/rest/services/Basisdata_Intern/NP_Verden_WMTS_53032/MapServer/tile/{z}/{y}/{x}').addTo(this);
