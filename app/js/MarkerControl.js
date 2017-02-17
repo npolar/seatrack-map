@@ -4,21 +4,9 @@ import 'dialog-polyfill/dialog-polyfill.css';
 import proj4 from 'proj4';
 
 proj4.defs([
-    ['ESRI:53032', '+proj=aeqd +lat_0=0 +lon_0=0 +x_0=0 +y_0=0 +a=6371000 +b=6371000 +units=m no_defs'],
-    ['EPSG:4035', '+proj=longlat +a=6371000 +b=6371000 +no_defs']  // Spherical https://osgeo-org.atlassian.net/browse/GEOS-7778#comment-60141
+    ['ESRI:53032', '+proj=aeqd +lat_0=0 +lon_0=0 +x_0=0 +y_0=0 +a=6371000 +b=6371000 +units=m no_defs'], // Sphere Azimuthal Equidistant
+    ['EPSG:4035', '+proj=longlat +a=6371000 +b=6371000 +no_defs']  // Spherical CRS https://osgeo-org.atlassian.net/browse/GEOS-7778#comment-60141
 ]);
-
-// https://epsg.io/53032
-// Same origin and resolutions as Web Mercator
-//const crs = new L.Proj.CRS('ESRI:53032', '+proj=aeqd +lat_0=0 +lon_0=0 +x_0=0 +y_0=0 +a=6371000 +b=6371000 +units=m no_defs', {
-//    origin: [-20037508.34, 20037508.34],
-//    resolutions: [156543.03, 78271.52, 39135.76, 19567.88, 9783.94, 4891.97, 2445.98, 1222.99, 611.50, 305.75, 152.87, 76.44, 38.22]
-//});
-
-// Need to specify from projection as a sphere to get the calculations right
-// https://osgeo-org.atlassian.net/browse/GEOS-7778#comment-60141
-//proj4.defs('EPSG:4035', '+proj=longlat +a=6371000 +b=6371000 +no_defs');
-//crs.projection._proj = proj4('EPSG:4035', 'ESRI:53032');
 
 export const MarkerControl = L.Control.extend({
 
@@ -142,7 +130,11 @@ export const MarkerControl = L.Control.extend({
             this._map.removeLayer(this._marker);
         }
 
-        // Reproject
+        // Reproject coordinates as we're using Sphere Azimuthal Equidistant projection in Web Mercator space
+        // 1. Reproject from spherical (EPSG:4025) to Sphere Azimuthal Equidistant (ESRI:53032) using WGS84 longitude, latitude
+        // 2. Reproject from Web Mercator (EPSG:3857) to Spherical (EPSG:4025) using coordinates from above
+        // The marker should then show up at the correct location on the map.
+        // Why we're using spherical CRS and not EPSG:4326: https://osgeo-org.atlassian.net/browse/GEOS-7778#comment-60141
         latlng = proj4(proj4('EPSG:3857'), proj4('EPSG:4035'), proj4(proj4('EPSG:4035'), proj4('ESRI:53032'), latlng.reverse())).reverse();
 
         this._marker = L.marker(latlng).addTo(this._map);
@@ -152,8 +144,6 @@ export const MarkerControl = L.Control.extend({
         this._marker.on('popupopen', () => {
             select(this._marker._popup._contentNode).select('.seatrack-marker-remove').on('click', () => this._map.removeLayer(this._marker));
         });
-
-        // window.history.pushState({}, null, `?longitude=${longitude}&latitude=${latitude}`);
     },
 
     getDegrees() {
