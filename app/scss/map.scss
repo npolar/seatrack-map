@@ -3,6 +3,10 @@
   width: auto;
   overflow: hidden;
 
+  .leaflet-bar a {
+    border-radius: 0;
+  }
+
   .leaflet-control {
     border-radius: 0;
 
