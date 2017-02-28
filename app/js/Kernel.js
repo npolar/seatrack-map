@@ -40,6 +40,10 @@ export const Kernel = L.Class.extend({
                 return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
             },
             season(a, b) {
+                const seasons = ['autumn', 'fall', 'winter', 'spring']; // TODO: Remove 'fall' when kernel files are updated
+                a = seasons.indexOf(a);
+                b = seasons.indexOf(b);
+
                 return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
             },
             period(a, b) {
