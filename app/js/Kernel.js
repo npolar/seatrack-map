@@ -40,7 +40,7 @@ export const Kernel = L.Class.extend({
                 return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
             },
             season(a, b) {
-                const seasons = ['autumn', 'fall', 'winter', 'spring']; // TODO: Remove 'fall' when kernel files are updated
+                const seasons = ['autumn', 'winter', 'spring']; // TODO: Remove 'fall' when kernel files are updated
                 a = seasons.indexOf(a);
                 b = seasons.indexOf(b);
 
@@ -51,7 +51,6 @@ export const Kernel = L.Class.extend({
             }
         },
         names: {
-            'fall': 'Autumn (August to October)', // TODO: Remove when kernel files are updated
             'autumn': 'Autumn (August to October)',
             'winter': 'Winter (November to January)',
             'spring': 'Spring (February to April)'
@@ -222,7 +221,7 @@ export const Kernel = L.Class.extend({
 
     // TODO: Add cache
     getSpeciesData(species) {
-        this._cartoSQL.execute("SELECT DISTINCT colony, season, period, locations, colonies, individuals, days, months FROM {{species}}", { species: species })
+        this._cartoSQL.execute("SELECT DISTINCT colony, season, period, locations, colonies, individuals, days, months FROM {{species}} WHERE years = 1", { species: species })
             .done(data => this.onSpeciesDataLoad(data))
             .error(errors => console.error(errors));
     },
