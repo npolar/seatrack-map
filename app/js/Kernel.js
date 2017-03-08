@@ -171,7 +171,7 @@ export const Kernel = L.Class.extend({
     // Select species, colony, season, period
     select(id, value) {
         const selectEl = this['_' + id + 'Select'];
-        const itemEl = selectEl.select('[data-val="' + value + '"]');
+        const itemEl = selectEl.select('li[data-val="' + value + '"]');
 
         if (!itemEl.empty()) { // Item found
             const name = itemEl.text().split('(')[0]; // Don't include text in parenthesis
@@ -309,7 +309,7 @@ export const Kernel = L.Class.extend({
         if (state.colony === 'all_colonies') {
             colonies = this._rows.filter(d => d.season.toLowerCase() === state.season && d.period.toLowerCase() === state.period && d.colony.toLowerCase() !== 'all_colonies').map(d => d.colony);
         } else {
-            const item = this._colonySelect.select('[data-val="' + state.colony + '"]');
+            const item = this._colonySelect.select('li[data-val="' + state.colony + '"]');
 
             if (!item.empty()) {
                 colonies = [item.text()];
