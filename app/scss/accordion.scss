@@ -1,6 +1,8 @@
 @import "../lib/jquery-ui.min.css";
 
 #seatrack-accordion {
+  width: 239px;
+  overflow: hidden;
 
   .ui-accordion-header {
     border: 0;
