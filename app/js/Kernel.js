@@ -221,7 +221,7 @@ export const Kernel = L.Class.extend({
 
     // TODO: Add cache
     getSpeciesData(species) {
-        this._cartoSQL.execute("SELECT DISTINCT colony, season, period, locations, colonies, individuals, days, months FROM {{species}} WHERE years = 1", { species: species })
+        this._cartoSQL.execute("SELECT DISTINCT colony, season, period, locations, colonies, individuals, days, months FROM {{species}}", { species: species })
             .done(data => this.onSpeciesDataLoad(data))
             .error(errors => console.error(errors));
     },
