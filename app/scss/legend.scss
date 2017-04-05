@@ -1,0 +1,38 @@
+.seatrack-legend {
+
+  table {
+    margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  caption {
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 5px;
+  }
+
+  tbody tr {
+    &:nth-child(1) th {
+      opacity: 0.8;
+    }
+
+    &:nth-child(2) th {
+      opacity: 0.6;
+    }
+
+    &:nth-child(3) th {
+      opacity: 0.4;
+    }
+  }
+
+  th {
+    width: 20px;
+    border: 1px solid #fff;
+  }
+
+  td {
+    padding-left: 10px;
+  }
+
+}

@@ -216,6 +216,7 @@ export const Kernel = L.Class.extend({
         if (state.species && state.colony && state.season && state.period) {
             this.updateLayer(state);
             this.showMetadata(state);
+            // this.showLegend();
         }
     },
 
@@ -377,7 +378,32 @@ export const Kernel = L.Class.extend({
                 }
             }
         });
-    }
+    },
+
+    showLegend() {
+        const color = this.options.color;
+
+        this._container.select('.seatrack-legend').remove();
+
+        const div = this._container.append('div')
+            .attr('class', 'seatrack-legend');
+
+        const table = div.append('table');
+
+        table.append('caption')
+            .text('Legend');
+
+        const tbody = table.append('tbody');
+
+        ['75%', '50%', '25%'].forEach(d => {
+            const tr = tbody.append('tr');
+            tr.append('th').style('background', color);
+            tr.append('td').text(d);
+        });
+
+    },
+
+
 
 });
 
