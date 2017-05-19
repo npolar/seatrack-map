@@ -1,6 +1,5 @@
 import {select} from 'd3-selection';
 import dialogPolyfill from 'dialog-polyfill';
-import 'dialog-polyfill/dialog-polyfill.css';
 import proj4 from 'proj4';
 
 proj4.defs([
@@ -23,7 +22,7 @@ export const MarkerControl = L.Control.extend({
 
     _initLayout() {
         const container = this._container = L.DomUtil.create('div', 'leaflet-control-marker');
-        const dialog = this._dialog = document.querySelector('dialog');
+        const dialog = this._dialog = document.getElementById('seatrack-marker');
 
         L.DomEvent.disableClickPropagation(container);
         if (!L.Browser.touch) {

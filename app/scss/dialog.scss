@@ -1,8 +1,23 @@
 .mdl-dialog {
   padding: 5px;
+  max-height: 75%;
+  overflow-y: auto;
+
+  .seatrack-close {
+    position: absolute;
+    top: 8px;
+    right: 14px;
+    cursor: pointer;
+    color: #555;
+
+    &:hover {
+      color: #333;
+    }
+  }
 
   .mdl-dialog__title {
     font-size: 22px;
+    padding-top: 14px;
   }
 
   .mdl-dialog__content {
@@ -52,4 +67,5 @@
   }
 
 }
+
 

@@ -1,0 +1,45 @@
+#seatrack-info-button {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+  padding: 0 10px 0 5px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #555;
+  height: 32px;
+  line-height: 32px;
+  font-size: 12px;
+  font-weight: normal;
+  width: 210px;
+  text-align: left;
+
+  i {
+    font-size: 20px;
+    margin-top: -1px;
+    padding-right: 5px;
+  }
+
+  &:hover {
+    color: #111;
+  }
+}
+
+#seatrack-help {
+  width: 70%;
+  min-width: 290px;
+
+  .mdl-dialog__content {
+    padding-bottom: 0;
+  }
+  .mdl-dialog__actions {
+    padding-top: 0;
+  }
+}
+
+.is-small-screen {
+  .mdl-layout__drawer:not(.is-visible) {
+    #seatrack-info-btn {
+      display: block;
+    }
+  }
+}

@@ -49,6 +49,7 @@ export const Selection = L.Class.extend({
                 const count = self._kernelLayers.length - 1;
 
                 select('#seatrack-add-button').style('bottom', 10 + ((count - active) * 41) + 'px')
+                select('#seatrack-info-button').style('bottom', ((count - active) * 41) + 'px')
             }
         });
     },

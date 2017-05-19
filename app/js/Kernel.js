@@ -383,7 +383,7 @@ export const Kernel = L.Class.extend({
     showLegend() {
         const color = this.options.color;
 
-        this._container.select('.seatrack-legend').remove();
+        this._controls.select('.seatrack-legend').remove();
 
         const div = this._container.append('div')
             .attr('class', 'seatrack-legend');
@@ -402,8 +402,6 @@ export const Kernel = L.Class.extend({
         });
 
     },
-
-
 
 });
 
