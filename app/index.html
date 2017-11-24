@@ -70,6 +70,9 @@
             <button id="seatrack-info-button" class="seatrack-help-button mdl-button mdl-js-button">
                 <i class="material-icons">info_outline</i>About this map
             </button>
+            <button id="seatrack-download-button" class="seatrack-download-button mdl-button mdl-js-button">
+                <i class="material-icons">file_download</i>Download
+            </button>
         </div>
         <main id="seatrack-map" class="seatrack-map mdl-layout__content">
             <div id="tooltip" class="seatrack-tooltip">Select your map</div>
@@ -90,6 +93,32 @@
         </div>
         <div class="mdl-dialog__actions">
             <button type="button" class="mdl-button close">Close</button>
+        </div>
+    </dialog>
+
+    <dialog id="seatrack-download" class="mdl-dialog">
+        <div class="seatrack-close">&#10005;</div>
+        <h4 class="mdl-dialog__title">SEATRACK download</h4>
+        <div class="mdl-dialog__content">
+            <div id="home-view">
+                <h4></h4>
+            </div>
+
+            <button id="btn-home-view" class="btn btn-primary btn-margin">
+                Home
+            </button>
+
+            <button id="btn-login" class="btn btn-primary btn-margin">
+                Log In
+            </button>
+
+            <button id="btn-logout" class="btn btn-primary btn-margin">
+                Log Out
+            </button>
+        </div>
+        <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button close">Close</button>
+            <button id='seatrack-login-btn' type="button" class="mdl-button login">Login</button>
         </div>
     </dialog>
 

@@ -1,8 +1,9 @@
+import dialogPolyfill from 'dialog-polyfill';
+import 'dialog-polyfill/dialog-polyfill.css';
 import '../scss/styles.scss';
 import map from './Map';
 import selection from './Selection';
-import dialogPolyfill from 'dialog-polyfill';
-import 'dialog-polyfill/dialog-polyfill.css';
+import initDownload from './download';
 
 window.onload = function() {
     selection(map());
@@ -19,6 +20,8 @@ window.onload = function() {
 
     dialog.querySelector('.seatrack-close').addEventListener('click', () => dialog.close());
     dialog.querySelector('.close').addEventListener('click', () => dialog.close());
+
+    initDownload();
 
     // Add polyfill if needed
     if (!dialog.showModal) {

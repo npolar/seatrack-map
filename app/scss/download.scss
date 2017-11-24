@@ -1,6 +1,6 @@
-#seatrack-info-button {
+#seatrack-download-button {
   position: fixed;
-  left: -2px;
+  left: 130px;
   bottom: 0;
   z-index: 100;
   padding: 0 10px 0 10px;
@@ -24,22 +24,3 @@
   }
 }
 
-#seatrack-help {
-  width: 70%;
-  min-width: 290px;
-
-  .mdl-dialog__content {
-    padding-bottom: 0;
-  }
-  .mdl-dialog__actions {
-    padding-top: 0;
-  }
-}
-
-.is-small-screen {
-  .mdl-layout__drawer:not(.is-visible) {
-    #seatrack-info-btn {
-      display: block;
-    }
-  }
-}
