@@ -5,7 +5,7 @@ const webAuth = new auth0.WebAuth({
     clientID: 'hMSOqg7ShZ5EGGXOjf6v1NhB4um0TAXq',
     responseType: 'token id_token',
     audience: 'https://seatrack.eu.auth0.com/userinfo',
-    scope: 'openid',
+    scope: 'openid groups permissions roles',
     redirectUri: window.location.href
 });
 
@@ -22,8 +22,9 @@ export default () => {
 
     const loginBtn = document.getElementById('seatrack-login-btn');
     const logoutBtn = document.getElementById('seatrack-logout-btn');
-    const infoView = document.getElementById('seatrack-info-view');
-    const downloadView = document.getElementById('seatrack-download-view');
+    const notAuthenticated = document.getElementById('seatrack-not-authenticated');
+    const notApprovedView = document.getElementById('seatrack-not-approved');
+    const approvedView = document.getElementById('seatrack-approved');
 
     loginBtn.addEventListener('click', () => {
         webAuth.authorize();
@@ -33,11 +34,19 @@ export default () => {
         localStorage.removeItem('access_token');
         localStorage.removeItem('id_token');
         localStorage.removeItem('expires_at');
+
+        webAuth.logout({
+          returnTo: window.location.href,
+          clientID: 'hMSOqg7ShZ5EGGXOjf6v1NhB4um0TAXq',
+        });
+
+        /*
         showView();
 
         if (downloadDialog.open) {
             downloadDialog.close();
         }
+        */
     });
 
     const handleAuthentication = () => {
@@ -55,6 +64,7 @@ export default () => {
             } else if (err) {
                 console.log(err);
             }
+
             showView();
         });
     };
@@ -65,19 +75,40 @@ export default () => {
         return new Date().getTime() < expiresAt;
     };
 
-    function showView() {
+    const getApprovalStatus = (callback) => {
+        const accessToken = localStorage.getItem('access_token');
+
+        if (!accessToken) {
+            return false;
+        }
+
+        webAuth.client.userInfo(accessToken, (err, user) => {
+            callback(user['http://seatrack.seapop.no/approved']);
+        });
+    };
+
+    const showView = () => {
+        loginBtn.style.display = 'none';
+        logoutBtn.style.display = 'none';
+        notAuthenticated.style.display = 'none';
+        approvedView.style.display = 'none';
+        notApprovedView.style.display = 'none';
+
         if (isAuthenticated()) {
-            loginBtn.style.display = 'none';
             logoutBtn.style.display = 'inline-block';
-            infoView.style.display = 'none';
-            downloadView.style.display = 'block';
+
+            getApprovalStatus((isApproved) => {
+                if (isApproved) {
+                    approvedView.style.display = 'block';
+                } else {
+                    notApprovedView.style.display = 'block';
+                }
+            });
         } else {
             loginBtn.style.display = 'inline-block';
-            logoutBtn.style.display = 'none';
-            infoView.style.display = 'block';
-            downloadView.style.display = 'none';
+            notAuthenticated.style.display = 'block';
         }
-    }
+    };
 
     handleAuthentication();
 };
