@@ -1,3 +1,6 @@
+#seatrack-download.mdl-dialog {
+  width: 440px;
+}
 #seatrack-download-button {
   position: fixed;
   left: 130px;
@@ -10,7 +13,7 @@
   line-height: 32px;
   font-size: 12px;
   font-weight: normal;
-  width: 210px;
+  width: 110px;
   text-align: left;
 
   i {
@@ -24,3 +27,42 @@
   }
 }
 
+#seatrack-approved {
+  .files {
+    height: 400px;
+    overflow-y: auto;
+  }
+
+  a {
+    color: rgba(0,0,0,.54);
+  }
+
+  a:active, a:focus {
+    outline: 0;
+    border: none;
+    -moz-outline-style: none
+  }
+
+  table {
+
+    thead {
+      th {
+        white-space: nowrap;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+        line-height: 24px;
+      }
+    }
+    tbody {
+      td {
+        vertical-align: top;
+        padding: 5px 10px 5px 0;
+        border-bottom: 1px solid #e0e0e0;
+
+        &.nowrap {
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}

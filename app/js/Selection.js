@@ -133,4 +133,3 @@ export const Selection = L.Class.extend({
 export default function selection(map) {
     return new Selection(map);
 }
-

@@ -98,22 +98,39 @@
 
     <dialog id="seatrack-download" class="mdl-dialog">
         <div class="seatrack-close">&#10005;</div>
-        <h4 class="mdl-dialog__title">SEATRACK download</h4>
+        <h4 id="seatrack-download-title"class="mdl-dialog__title">SEATRACK download</h4>
         <div class="mdl-dialog__content">
             <div id="seatrack-not-authenticated">
-                <p>Not authenticated</p>
+                <p>You need to be logged in to download files. If you do not have an account you can apply for access by signing up below.</p>
+                <p>The data collected within the scope of the project is the shared property of SEATRACK and project participants.</p>
+                <p>Access to unprocessed or processed data are available for the funders of SEATRACK, and to institutions that are contracted by the governmental or industrial funders involved in SEATRACK.</p>
+                <p>Contracted users may access data to perform e.g. environmental risk assessments and management plans.</p>
             </div>
             <div id="seatrack-not-approved">
-                <p>Not approved</p>
+                <p>All account requests need to be evaluated and approved on behalf of SEATRACK. You will receive an email when your request has been processed (normally within 1-2 business days). Access is granted temporarily on individual basis.</p>
             </div>
             <div id="seatrack-approved">
-                <p>Approved</p>
+                <div class="files">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>File name</th>
+                                <th>File format</th>
+                                <th>File category</th>
+                                <th>File type</th>
+                                <th>File description</th>
+                                <th>Size</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <div class="mdl-dialog__actions">
-            <!-- <button type="button" class="mdl-button close">Close</button> -->
-            <button id='seatrack-login-btn' type="button" class="mdl-button login">Login or sign up</button>
-            <button id='seatrack-logout-btn' type="button" class="mdl-button login">Logout and close</button>
+            <button id='seatrack-login-btn' type="button" class="mdl-button login">Login</button>
+            <button id='seatrack-signup-btn' type="button" class="mdl-button signin">Sign up</button>
+            <button id='seatrack-logout-btn' type="button" class="mdl-button logut">Close</button>
         </div>
     </dialog>
 
