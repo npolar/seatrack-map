@@ -1,0 +1,11 @@
+{
+  "name": "seatrack",
+  "version": 2,
+  "regions": ["bru"],
+  "builds": [
+    {
+      "src": "**",
+      "use": "@now/static"
+    }
+  ]
+}
