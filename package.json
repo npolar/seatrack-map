@@ -35,7 +35,7 @@
     "webpack-merge": "^2.6.1"
   },
   "dependencies": {
-    "auth0-js": "^8.11.3",
+    "auth0-js": "^9.3.0",
     "d3-collection": "^1.0.1",
     "d3-selection": "^1.0.2",
     "dialog-polyfill": "^0.4.5",
