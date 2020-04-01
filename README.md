@@ -1,10 +1,10 @@
 # seatrack-map
 
 ```
-npm install
+yarn install
 ```
 
 ```
-npm start # to develop
-npm run build # to build to build-folder
+yarn start # to develop
+yarn build # to build to build-folder
 ```
