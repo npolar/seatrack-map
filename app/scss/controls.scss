@@ -23,6 +23,11 @@
   .mdl-button--fab.mdl-button--colored {
     background: red;
   }
+
+  // Hide disabled periods
+  #period-textfield li[disabled] {
+    display: none;
+  }
 }
 
 .seatrack-controls-max {
