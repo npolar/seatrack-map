@@ -9,7 +9,7 @@
   .mdl-menu__item {
     height: 26px;
     line-height: 26px;
-    font-size: 13px;
+    font-size: 14px !important;
   }
 
   #seatrack-add-button {
@@ -24,13 +24,14 @@
     background: red;
   }
 
+  // Hide disabled periods
+  #period-textfield li[disabled] {
+    display: none;
+  }
 }
 
 .seatrack-controls-max {
-
   .seatrack-add-button {
     display: none;
   }
-
 }
-
