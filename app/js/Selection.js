@@ -58,8 +58,15 @@ export const Selection = L.Class.extend({
         const active = $("#seatrack-accordion").accordion("option", "active");
         const count = self._kernelLayers.length - 1;
 
-        select("#").style("bottom", 10 + (count - active) * 41 + "px");
+        select("#seatrack-add-button").style(
+          "bottom",
+          40 + (count - active) * 41 + "px"
+        );
         select("#seatrack-info-button").style(
+          "bottom",
+          (count - active) * 41 + "px"
+        );
+        select("#seatrack-download-button").style(
           "bottom",
           (count - active) * 41 + "px"
         );
@@ -118,6 +125,7 @@ export const Selection = L.Class.extend({
       if (layers.length === 0) {
         layers.push(this.addKernelLayer());
         this._map.setColoniesOpacity(1);
+
         select("#seatrack-add-button").style("display", "none");
       } else {
         $("#seatrack-accordion").accordion("option", "active", -1);

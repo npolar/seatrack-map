@@ -1,4 +1,5 @@
 import { nest } from "d3-collection";
+import throttle from "lodash.throttle";
 import getmdlSelect from "./getmdlSelect";
 const componentHandler = require("../../node_modules/material-design-lite/material");
 
@@ -74,6 +75,11 @@ export const Kernel = L.Class.extend({
 
     this._expanded = true;
     this._initLayout(container);
+
+    // Makes sure update is only called once when selection is changed
+    this.updateLayerThrottled = throttle(this.updateLayer, 0, {
+      leading: false
+    });
   },
 
   addTo(map) {
@@ -260,7 +266,7 @@ export const Kernel = L.Class.extend({
     this.disableSelectItems();
 
     if (state.species && state.colony && state.season && state.period) {
-      this.updateLayer(state);
+      this.updateLayerThrottled(state);
       this.showMetadata(state);
       // this.showLegend();
     }
