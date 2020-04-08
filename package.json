@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/npolar/seatrack/issues"
   },
-  "homepage": "http://mastermaps.com/seatrack",
+  "homepage": "http://seatrack.seapop.no/map",
   "devDependencies": {
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.1",
