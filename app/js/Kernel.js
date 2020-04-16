@@ -23,24 +23,24 @@ export const Kernel = L.Class.extend({
       { id: "larus_argentatus", name: "Herring gull" },
       { id: "larus_fuscus", name: "Lesser black-backed gull" },
       { id: "alle_alle", name: "Little auk" },
-      { id: "fulmarus_glacialis", name: "Northern fulmar" }
+      { id: "fulmarus_glacialis", name: "Northern fulmar" },
     ],
     state: {
       species: null,
       colony: null,
       season: null,
-      period: null
+      period: null,
     },
     kernel: {
       sql:
         "SELECT cartodb_id, ST_Transform(the_geom, 53032) AS the_geom_webmercator FROM {species} WHERE kernel_density IN (25, 50, 75) AND lower(colony) = '{colony}' AND lower(season) = '{season}' AND lower(period) = '{period}' ORDER BY kernel_density DESC",
       cartocss:
-        "#kernel{ polygon-fill: {color}; polygon-opacity: 0.4; line-color: #FFF; line-width: 0.5; line-opacity: 1; }"
+        "#kernel{ polygon-fill: {color}; polygon-opacity: 0.4; line-color: #FFF; line-width: 0.5; line-opacity: 1; }",
     },
     colonies: {
       sql:
         "SELECT cartodb_id, ST_Transform(the_geom, 53032) AS the_geom_webmercator FROM colonies WHERE colony IN ({colonies})",
-      cartocss: "#colony{ marker-fill: #333333; marker-allow-overlap: true; }"
+      cartocss: "#colony{ marker-fill: #333333; marker-allow-overlap: true; }",
     },
     sort: {
       colony(a, b) {
@@ -55,21 +55,19 @@ export const Kernel = L.Class.extend({
       },
       period(a, b) {
         return b < a ? -1 : b > a ? 1 : b >= a ? 0 : NaN;
-      }
+      },
     },
     names: {
       autumn: "Autumn (August to October)",
       winter: "Winter (November to January)",
-      spring: "Spring (February to April)"
-    }
+      spring: "Spring (February to April)",
+    },
   },
 
   initialize(container, options) {
     L.setOptions(this, options);
 
-    this._id = Math.random()
-      .toString(36)
-      .substring(7);
+    this._id = Math.random().toString(36).substring(7);
 
     this._cartoSQL = new cartodb.SQL({ user: "seatrack" });
 
@@ -78,7 +76,7 @@ export const Kernel = L.Class.extend({
 
     // Makes sure update is only called once when selection is changed
     this.updateLayerThrottled = throttle(this.updateLayer, 0, {
-      leading: false
+      leading: false,
     });
   },
 
@@ -159,7 +157,7 @@ export const Kernel = L.Class.extend({
       .attr("type", "text")
       .attr("value", "")
       .attr("readonly", true)
-      .on("change", function(d) {
+      .on("change", function (d) {
         if (onChange) {
           onChange(id, this.dataset.val, this.value);
         }
@@ -189,8 +187,8 @@ export const Kernel = L.Class.extend({
         .enter()
         .append("li")
         .attr("class", "mdl-menu__item")
-        .attr("data-val", d => d.id)
-        .text(d => d.name);
+        .attr("data-val", (d) => d.id)
+        .text((d) => d.name);
     }
 
     getmdlSelect.addEventListeners(div.node(), true);
@@ -251,6 +249,8 @@ export const Kernel = L.Class.extend({
 
   // Season, period select handler
   onSelect(id, value) {
+    this.disableSelectItems();
+
     const state = this._state;
 
     state[id] = value.toLowerCase();
@@ -262,8 +262,6 @@ export const Kernel = L.Class.extend({
         state[id] = value.toLowerCase().replace(allYearsString, "");
       }
     }
-
-    this.disableSelectItems();
 
     if (state.species && state.colony && state.season && state.period) {
       this.updateLayerThrottled(state);
@@ -279,8 +277,8 @@ export const Kernel = L.Class.extend({
         "SELECT DISTINCT colony, season, period, locations, colonies, individuals, days, months, all_years FROM {{species}}",
         { species: species }
       )
-      .done(data => this.onSpeciesDataLoad(data))
-      .error(errors => console.error(errors));
+      .done((data) => this.onSpeciesDataLoad(data))
+      .error((errors) => console.error(errors));
   },
 
   onSpeciesDataLoad(data) {
@@ -309,7 +307,7 @@ export const Kernel = L.Class.extend({
     const textfield = this["_" + id + "Select"];
 
     const items = nest()
-      .key(d =>
+      .key((d) =>
         id === "period" && d.all_years === "true" ? `All years ${d[id]}` : d[id]
       )
       .sortKeys(this.options.sort[id])
@@ -327,9 +325,9 @@ export const Kernel = L.Class.extend({
       .enter()
       .append("li")
       .attr("class", "mdl-menu__item")
-      .attr("data-val", d => d.key.toLowerCase())
-      .text(d => this.options.names[d.key] || d.key.replace(/_/g, " "))
-      .on("click", function(d) {
+      .attr("data-val", (d) => d.key.toLowerCase())
+      .text((d) => this.options.names[d.key] || d.key.replace(/_/g, " "))
+      .on("click", function (d) {
         if (!this.getAttribute("disabled")) {
           self.onSelect(id, d.key);
         }
@@ -346,9 +344,9 @@ export const Kernel = L.Class.extend({
       // Disable season if no data for selected colony and period
       this._seasonSelect
         .selectAll("li")
-        .attr("disabled", d =>
+        .attr("disabled", (d) =>
           d.values.filter(
-            d =>
+            (d) =>
               d.period.toLowerCase() === state.period &&
               d.colony.toLowerCase() === state.colony
           ).length
@@ -359,9 +357,9 @@ export const Kernel = L.Class.extend({
       // Disable period if no data for selected season and colony
       this._periodSelect
         .selectAll("li")
-        .attr("disabled", d =>
+        .attr("disabled", (d) =>
           d.values.filter(
-            d =>
+            (d) =>
               d.season.toLowerCase() === state.season &&
               d.colony.toLowerCase() === state.colony
           ).length
@@ -371,7 +369,7 @@ export const Kernel = L.Class.extend({
 
       const selectedPeriod = this._periodSelect
         .selectAll("li")
-        .filter(p => p.key.includes(state.period))
+        .filter((p) => p.key.includes(state.period))
         .nodes()[0];
 
       // If selected period is disabled
@@ -386,9 +384,9 @@ export const Kernel = L.Class.extend({
       // Disable colony if no data for selected season and period
       this._colonySelect
         .selectAll("li")
-        .attr("disabled", d =>
+        .attr("disabled", (d) =>
           d.values.filter(
-            d =>
+            (d) =>
               d.season.toLowerCase() === state.season &&
               (state.allYears || d.period.toLowerCase() === state.period)
           ).length
@@ -420,12 +418,12 @@ export const Kernel = L.Class.extend({
     if (state.colony === "all_colonies") {
       colonies = this._rows
         .filter(
-          d =>
+          (d) =>
             d.season.toLowerCase() === state.season &&
             d.colony.toLowerCase() !== "all_colonies" &&
             (state.allYears || d.period.toLowerCase() === state.period)
         )
-        .map(d => d.colony)
+        .map((d) => d.colony)
         .filter(onlyUnique);
     } else {
       const item = this._colonySelect.select(
@@ -439,12 +437,13 @@ export const Kernel = L.Class.extend({
 
     if (this._layer) {
       map.removeLayer(this._layer);
+      this._layer = null;
     }
 
     const kerneSql = L.Util.template(options.kernel.sql, state);
 
     const coloniesSql = L.Util.template(options.colonies.sql, {
-      colonies: "'" + colonies.join("','") + "'"
+      colonies: "'" + colonies.join("','") + "'",
     });
 
     cartodb
@@ -456,29 +455,33 @@ export const Kernel = L.Class.extend({
           sublayers: [
             {
               sql: kerneSql,
-              cartocss: L.Util.template(options.kernel.cartocss, options)
+              cartocss: L.Util.template(options.kernel.cartocss, options),
             },
             {
               sql: coloniesSql,
-              cartocss: options.colonies.cartocss
-            }
-          ]
+              cartocss: options.colonies.cartocss,
+            },
+          ],
         },
         { https: true }
       )
       .addTo(map)
       .on("done", this.onLayerLoad.bind(this))
-      .on("error", err => console.error(err));
+      .on("error", (err) => console.error(err));
   },
 
   onLayerLoad(layer) {
+    if (this._layer) {
+      this._map.removeLayer(this._layer);
+    }
+
     this._layer = layer;
   },
 
   showMetadata(state) {
     this._container.select(".seatrack-metadata").remove();
 
-    this._rows.forEach(row => {
+    this._rows.forEach((row) => {
       if (
         row.season.toLowerCase() === state.season &&
         row.period.toLowerCase() === state.period &&
@@ -495,7 +498,7 @@ export const Kernel = L.Class.extend({
         const tbody = table.append("tbody");
 
         ["Locations", "Colonies", "Individuals", "Days", "Months"].forEach(
-          d => {
+          (d) => {
             const tr = tbody.append("tr");
             tr.append("th").text(d + ":");
             tr.append("td").text(row[d.toLowerCase()]);
@@ -529,12 +532,12 @@ export const Kernel = L.Class.extend({
 
     const tbody = table.append("tbody");
 
-    ["75%", "50%", "25%"].forEach(d => {
+    ["75%", "50%", "25%"].forEach((d) => {
       const tr = tbody.append("tr");
       tr.append("th").style("background", color);
       tr.append("td").text(d);
     });
-  }
+  },
 });
 
 export default function kernel(container, options) {
