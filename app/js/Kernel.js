@@ -249,11 +249,11 @@ export const Kernel = L.Class.extend({
 
   // Season, period select handler
   onSelect(id, value) {
-    this.disableSelectItems();
-
     const state = this._state;
 
     state[id] = value.toLowerCase();
+
+    this.disableSelectItems();
 
     if (id === "period") {
       state.allYears = value.toLowerCase().includes(allYearsString);
@@ -299,6 +299,7 @@ export const Kernel = L.Class.extend({
           ? this._periodSelect.select("li:first-child").attr("data-val")
           : state.period
       );
+
       this.select("colony", state.colony || "all_colonies");
     }
   },
@@ -317,6 +318,8 @@ export const Kernel = L.Class.extend({
     textfield.selectAll("li").remove(); // TODO: Do proper D3 way - remove eventlisteners?
 
     const self = this;
+
+    // console.log("addSelectItems", id, items);
 
     textfield
       .select("ul")
@@ -354,6 +357,8 @@ export const Kernel = L.Class.extend({
             : "disabled"
         );
 
+      console.log("colony", state.colony);
+
       // Disable period if no data for selected season and colony
       this._periodSelect
         .selectAll("li")
@@ -372,13 +377,18 @@ export const Kernel = L.Class.extend({
         .filter((p) => p.key.includes(state.period))
         .nodes()[0];
 
+      // console.log("selectedPeriod", state);
+
       // If selected period is disabled
       if (selectedPeriod && selectedPeriod.getAttribute("disabled")) {
+        const firstPeriod = this._periodSelect.select("li:not([disabled])");
+
+        console.log("firstPeriod", firstPeriod.size());
+
         // Select the first period not disabled
-        this.select(
-          "period",
-          this._periodSelect.select("li:not([disabled])").attr("data-val")
-        );
+        if (firstPeriod.size()) {
+          this.select("period", firstPeriod.attr("data-val"));
+        }
       }
 
       // Disable colony if no data for selected season and period
@@ -397,6 +407,8 @@ export const Kernel = L.Class.extend({
   },
 
   updateLayer(state) {
+    // console.log("updateLayer", state);
+
     if (!this._prevState) {
       this._prevState = L.extend({}, state);
     } else {
@@ -410,6 +422,8 @@ export const Kernel = L.Class.extend({
       }
       this._prevState = L.extend({}, state);
     }
+
+    // console.log("updateLayer after", state);
 
     const map = this._map;
     const options = this.options;
@@ -441,6 +455,8 @@ export const Kernel = L.Class.extend({
     }
 
     const kerneSql = L.Util.template(options.kernel.sql, state);
+
+    // console.log("sql", kerneSql, state);
 
     const coloniesSql = L.Util.template(options.colonies.sql, {
       colonies: "'" + colonies.join("','") + "'",
