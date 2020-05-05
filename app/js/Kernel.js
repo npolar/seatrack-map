@@ -253,8 +253,6 @@ export const Kernel = L.Class.extend({
 
     state[id] = value.toLowerCase();
 
-    this.disableSelectItems();
-
     if (id === "period") {
       state.allYears = value.toLowerCase().includes(allYearsString);
 
@@ -262,6 +260,8 @@ export const Kernel = L.Class.extend({
         state[id] = value.toLowerCase().replace(allYearsString, "");
       }
     }
+
+    this.disableSelectItems();
 
     if (state.species && state.colony && state.season && state.period) {
       this.updateLayerThrottled(state);
@@ -319,8 +319,6 @@ export const Kernel = L.Class.extend({
 
     const self = this;
 
-    // console.log("addSelectItems", id, items);
-
     textfield
       .select("ul")
       .selectAll("li")
@@ -345,6 +343,7 @@ export const Kernel = L.Class.extend({
 
     if (state.species && state.colony && state.season && state.period) {
       // Disable season if no data for selected colony and period
+
       this._seasonSelect
         .selectAll("li")
         .attr("disabled", (d) =>
@@ -356,8 +355,6 @@ export const Kernel = L.Class.extend({
             ? null
             : "disabled"
         );
-
-      console.log("colony", state.colony);
 
       // Disable period if no data for selected season and colony
       this._periodSelect
@@ -377,13 +374,9 @@ export const Kernel = L.Class.extend({
         .filter((p) => p.key.includes(state.period))
         .nodes()[0];
 
-      // console.log("selectedPeriod", state);
-
       // If selected period is disabled
       if (selectedPeriod && selectedPeriod.getAttribute("disabled")) {
         const firstPeriod = this._periodSelect.select("li:not([disabled])");
-
-        console.log("firstPeriod", firstPeriod.size());
 
         // Select the first period not disabled
         if (firstPeriod.size()) {
@@ -407,8 +400,6 @@ export const Kernel = L.Class.extend({
   },
 
   updateLayer(state) {
-    // console.log("updateLayer", state);
-
     if (!this._prevState) {
       this._prevState = L.extend({}, state);
     } else {
@@ -422,8 +413,6 @@ export const Kernel = L.Class.extend({
       }
       this._prevState = L.extend({}, state);
     }
-
-    // console.log("updateLayer after", state);
 
     const map = this._map;
     const options = this.options;
@@ -455,8 +444,6 @@ export const Kernel = L.Class.extend({
     }
 
     const kerneSql = L.Util.template(options.kernel.sql, state);
-
-    // console.log("sql", kerneSql, state);
 
     const coloniesSql = L.Util.template(options.colonies.sql, {
       colonies: "'" + colonies.join("','") + "'",
