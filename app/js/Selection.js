@@ -13,8 +13,8 @@ export const Selection = L.Class.extend({
       "#33a02c",
       "#b15928",
       "#e31a1c",
-      "#6a3d9a"
-    ]
+      "#6a3d9a",
+    ],
   },
 
   initialize(map) {
@@ -23,7 +23,7 @@ export const Selection = L.Class.extend({
 
     this.createAccordion();
 
-    $(window).resize(function() {
+    $(window).resize(function () {
       $("#seatrack-accordion").accordion("refresh");
     });
 
@@ -37,8 +37,8 @@ export const Selection = L.Class.extend({
           species: this.getURLParameter("species"),
           season: this.getURLParameter("season"),
           period: this.getURLParameter("period"),
-          colony: this.getURLParameter("colony")
-        }
+          colony: this.getURLParameter("colony"),
+        },
       })
     );
 
@@ -70,14 +70,14 @@ export const Selection = L.Class.extend({
           "bottom",
           (count - active) * 41 + "px"
         );
-      }
+      },
     });
   },
 
   addKernelLayer(options) {
     const layers = this._kernelLayers;
     const colors = this.options.kernelColors.filter(
-      color => !this.colorInUse(color)
+      (color) => !this.colorInUse(color)
     );
 
     options = options || {};
@@ -139,7 +139,7 @@ export const Selection = L.Class.extend({
   colorInUse(color) {
     let inUse = false;
 
-    this._kernelLayers.forEach(layer => {
+    this._kernelLayers.forEach((layer) => {
       if (color === layer.options.color) {
         inUse = true;
       }
@@ -156,7 +156,7 @@ export const Selection = L.Class.extend({
         ) || [, ""])[1].replace(/\+/g, "%20")
       ) || null
     );
-  }
+  },
 });
 
 export default function selection(map) {

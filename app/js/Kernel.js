@@ -4,7 +4,6 @@ import getmdlSelect from "./getmdlSelect";
 const componentHandler = require("../../node_modules/material-design-lite/material");
 
 const allYearsString = "all years ";
-const dataYear = 2021;
 
 const onlyUnique = (value, index, self) => self.indexOf(value) === index;
 
@@ -14,17 +13,17 @@ export const Kernel = L.Class.extend({
   options: {
     color: "#FF6600",
     species: [
-      { id: `fratercula_arctica_${dataYear}`, name: "Atlantic puffin" },
-      { id: `rissa_tridactyla_${dataYear}`, name: "Black-legged kittiwake" },
-      { id: `uria_lomvia_${dataYear}`, name: "Brünnich's guillemot" },
-      { id: `somateria_mollissima_${dataYear}`, name: "Common eider" },
-      { id: `uria_aalge_${dataYear}`, name: "Common guillemot" },
-      { id: `phalacrocorax_aristotelis_${dataYear}`, name: "European shag" },
-      { id: `larus_hyperboreus_${dataYear}`, name: "Glaucous gull" },
-      { id: `larus_argentatus_${dataYear}`, name: "Herring gull" },
-      { id: `larus_fuscus_${dataYear}`, name: "Lesser black-backed gull" },
-      { id: `alle_alle_${dataYear}`, name: "Little auk" },
-      { id: `fulmarus_glacialis_${dataYear}`, name: "Northern fulmar" },
+      { id: `fratercula_arctica`, name: "Atlantic puffin" },
+      { id: `rissa_tridactyla`, name: "Black-legged kittiwake" },
+      { id: `uria_lomvia`, name: "Brünnich's guillemot" },
+      { id: `somateria_mollissima`, name: "Common eider" },
+      { id: `uria_aalge`, name: "Common guillemot" },
+      { id: `phalacrocorax_aristotelis`, name: "European shag" },
+      { id: `larus_hyperboreus`, name: "Glaucous gull" },
+      { id: `larus_argentatus`, name: "Herring gull" },
+      { id: `larus_fuscus`, name: "Lesser black-backed gull" },
+      { id: `alle_alle`, name: "Little auk" },
+      { id: `fulmarus_glacialis`, name: "Northern fulmar" },
     ],
     state: {
       species: null,
@@ -219,6 +218,7 @@ export const Kernel = L.Class.extend({
       }
 
       selectEl.node().MaterialTextfield.change(name);
+
       if (id === "species") {
         this.onSpeciesSelect(id, value, name);
       } else {
