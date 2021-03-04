@@ -283,10 +283,6 @@ export const Kernel = L.Class.extend({
   },
 
   onSpeciesDataLoad(data) {
-    const test = data.rows.filter(
-      (d) => d.colony === "All_colonies" && d.season === "All_seasons"
-    );
-
     const state = this._state;
 
     if (data.total_rows) {
