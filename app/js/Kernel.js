@@ -283,6 +283,10 @@ export const Kernel = L.Class.extend({
   },
 
   onSpeciesDataLoad(data) {
+    const test = data.rows.filter(
+      (d) => d.colony === "All_colonies" && d.season === "All_seasons"
+    );
+
     const state = this._state;
 
     if (data.total_rows) {
@@ -372,7 +376,13 @@ export const Kernel = L.Class.extend({
 
       const selectedPeriod = this._periodSelect
         .selectAll("li")
-        .filter((p) => p.key.includes(state.period))
+        .filter(
+          (p) =>
+            p.key.includes(state.period) &&
+            (state.allYears
+              ? p.key.includes("All years")
+              : !p.key.includes("All years"))
+        )
         .nodes()[0];
 
       // If selected period is disabled
