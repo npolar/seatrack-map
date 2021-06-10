@@ -66,10 +66,12 @@ export const Selection = L.Class.extend({
           "bottom",
           (count - active) * 41 + "px"
         );
+        /*
         select("#seatrack-download-button").style(
           "bottom",
           (count - active) * 41 + "px"
         );
+        */
       },
     });
   },
