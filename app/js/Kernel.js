@@ -32,14 +32,12 @@ export const Kernel = L.Class.extend({
       period: null,
     },
     kernel: {
-      sql:
-        "SELECT cartodb_id, ST_Transform(the_geom, 53032) AS the_geom_webmercator FROM {species} WHERE kernel_density IN (25, 50, 75) AND lower(colony) = '{colony}' AND lower(season) = '{season}' AND lower(period) = '{period}' ORDER BY kernel_density DESC",
+      sql: "SELECT cartodb_id, ST_Transform(the_geom, 53032) AS the_geom_webmercator FROM {species} WHERE kernel_density IN (25, 50, 75) AND lower(colony) = '{colony}' AND lower(season) = '{season}' AND lower(period) = '{period}' ORDER BY kernel_density DESC",
       cartocss:
         "#kernel{ polygon-fill: {color}; polygon-opacity: 0.4; line-color: #FFF; line-width: 0.5; line-opacity: 1; }",
     },
     colonies: {
-      sql:
-        "SELECT cartodb_id, ST_Transform(the_geom, 53032) AS the_geom_webmercator FROM colonies WHERE colony IN ({colonies})",
+      sql: "SELECT cartodb_id, ST_Transform(the_geom, 53032) AS the_geom_webmercator FROM colonies WHERE colony IN ({colonies})",
       cartocss: "#colony{ marker-fill: #333333; marker-allow-overlap: true; }",
     },
     sort: {

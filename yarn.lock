@@ -2052,9 +2052,10 @@ get-value@^2.0.3, get-value@^2.0.6:
   resolved "https://registry.yarnpkg.com/get-value/-/get-value-2.0.6.tgz#dc15ca1c672387ca76bd37ac0a395ba2042a2c28"
   integrity sha1-3BXKHGcjh8p2vTesCjlbogQqLCg=
 
-getmdl-select@^1.0.4:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/getmdl-select/-/getmdl-select-1.1.0.tgz#44122d7167852be565db37b444f944140d422314"
+getmdl-select@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/getmdl-select/-/getmdl-select-2.0.1.tgz#4bdbd77fdfd3e7b2c3fac503a32d25b0872e1321"
+  integrity sha1-S9vXf9/T57LD+sUDoy0lsIcuEyE=
   dependencies:
     material-design-lite "^1.1.3"
 
