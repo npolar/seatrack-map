@@ -1,6 +1,7 @@
 # seatrack-map
 
 ```
+nvm use 8
 yarn install
 ```
 
