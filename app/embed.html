@@ -1,68 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>SEATRACK colonies</title>
-    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+    <link
+      rel="stylesheet"
+      href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css"
+    />
     <style>
-        #map {
-            width: 500px;
-            height: 350px;
-        }
+      #map {
+        width: 500px;
+        height: 350px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <div id="map"></div>
 
-<div id="map"></div>
-
-<script src="//libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
-<script>
-
-window.onload = function() {
-
-    // Create map with initial view
-    var map = new L.Map('map', {
-        center: [57, 4],
-        zoom: 4,
-        scrollWheelZoom: false
-    });
-
-    map.attributionControl.setPrefix('SEATRACK');
-
-    // Add basemap
-    L.tileLayer('//geodata.npolar.no/arcgis/rest/services/Basisdata_Intern/NP_Verden_WMTS_53032/MapServer/tile/{z}/{y}/{x}').addTo(map);
-
-    cartodb.createLayer(map, {
-        user_name: 'seatrack',
-        type: 'cartodb',
-        sublayers: [{
-            sql: 'SELECT cartodb_id, ST_Transform(the_geom, 53032) AS the_geom_webmercator, colony FROM colonies',
-            cartocss: '#colony{ marker-fill-opacity: 1;marker-line-color: #000000;marker-line-width: 1.5;marker-line-opacity: 1;marker-placement: point;marker-type: ellipse;marker-width: 10;marker-fill: #F11810;marker-allow-overlap: true; }',
-            interactivity: "cartodb_id,colony,international_name"
-        }]
-    }).addTo(map).on('done', function(layer) {
-
-        layer.setInteraction(true);
-
-        layer.on('featureClick', function(evt, latlng, pos, data, layer) {
-            alert(data.cartodb_id + ' ' + data.colony);
+    <script src="//libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+    <script>
+      window.onload = function () {
+        // Create map with initial view
+        var map = new L.Map("map", {
+          center: [57, 4],
+          zoom: 4,
+          scrollWheelZoom: false,
         });
 
-        // Change cursor to indicate interactivity
-        layer.on('mouseover', function() {
-            map.getContainer().style.cursor = 'pointer';
-        });
+        map.attributionControl.setPrefix("SEATRACK");
 
-        layer.on('mouseout', function() {
-            map.getContainer().style.cursor = 'auto';
-        });
+        // Add basemap
+        L.tileLayer(
+          "//geodata.npolar.no/arcgis/rest/services/Basisdata_Intern/NP_Verden_WMTS_53032/MapServer/tile/{z}/{y}/{x}"
+        ).addTo(map);
 
-    });
+        cartodb
+          .createLayer(map, {
+            user_name: "seatrack",
+            type: "cartodb",
+            sublayers: [
+              {
+                sql: "SELECT cartodb_id, ST_Transform(the_geom, 53032) AS the_geom_webmercator, colony FROM colonies",
+                cartocss:
+                  "#colony{ marker-fill-opacity: 1;marker-line-color: #000000;marker-line-width: 1.5;marker-line-opacity: 1;marker-placement: point;marker-type: ellipse;marker-width: 10;marker-fill: #F11810;marker-allow-overlap: true; }",
+                interactivity: "cartodb_id,colony,international_name",
+              },
+            ],
+          })
+          .addTo(map)
+          .on("done", function (layer) {
+            layer.setInteraction(true);
 
-}
+            layer.on("featureClick", function (evt, latlng, pos, data, layer) {
+              alert(data.cartodb_id + " " + data.colony);
+            });
 
-</script>
-</body>
+            // Change cursor to indicate interactivity
+            layer.on("mouseover", function () {
+              map.getContainer().style.cursor = "pointer";
+            });
+
+            layer.on("mouseout", function () {
+              map.getContainer().style.cursor = "auto";
+            });
+          });
+      };
+    </script>
+  </body>
 </html>

@@ -39,7 +39,7 @@
     "d3-collection": "^1.0.1",
     "d3-selection": "^1.0.2",
     "dialog-polyfill": "^0.4.5",
-    "getmdl-select": "^1.0.4",
+    "getmdl-select": "^2.0.1",
     "lodash.throttle": "^4.1.1",
     "material-design-lite": "^1.2.1",
     "proj4": "^2.3.17"
